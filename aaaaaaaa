@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranger Things Watch Party?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            background: transparent;
+            color: #fff;
+            padding: 50px;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, #000 0%, #111 50%, #000 100%);
+            z-index: -1;
+        }
+        h1 {
+            font-size: 1.5em;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+            margin-bottom: 40px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
+            padding: 15px 30px;
+            margin: 10px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        #yesBtn {
+            background-color: #00ff00;
+            color: #000;
+            text-shadow: none;
+        }
+        #yesBtn:hover {
+            box-shadow: 0 0 20px #00ff00;
+        }
+        #noBtn {
+            background-color: #ff0000;
+            color: #fff;
+        }
+        #noBtn:hover {
+            box-shadow: 0 0 20px #ff0000;
+        }
+        .enlarged {
+            transform: scale(5);
+            animation: pulse 0.5s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #ff0000; }
+            100% { box-shadow: 0 0 40px #ff0000; }
+        }
+        .message {
+            display: none;
+            font-size: 1.2em;
+            margin-top: 40px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hey, want to watch Stranger Things together? 🛸</h1>
+    <div class="buttons">
+        <button id="yesBtn">Yes!</button>
+        <button id="noBtn">No</button>
+    </div>
+    <div id="message" class="message">
+        Thank you so much! You're the best! 💖<br>
+        Lika na dito sa Discord!
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const message = document.getElementById('message');
+
+        yesBtn.addEventListener('click', () => {
+            // Hide buttons and show message
+            document.querySelector('.buttons').style.display = 'none';
+            message.style.display = 'block';
+        });
+
+        noBtn.addEventListener('click', () => {
+            // Make No button 5x bigger with pulsing effect
+            noBtn.classList.add('enlarged');
+            // After a short delay, change text to Yes
+            setTimeout(() => {
+                noBtn.textContent = 'Yes';
+                noBtn.id = 'yesBtn'; // Change ID to make it act like Yes
+                noBtn.style.backgroundColor = '#00ff00';
+                noBtn.style.color = '#000';
+                noBtn.classList.remove('enlarged');
+                // Add the Yes click event
+                noBtn.addEventListener('click', () => {
+                    // Hide buttons and show message
+                    document.querySelector('.buttons').style.display = 'none';
+                    message.style.display = 'block';
+                });
+            }, 1000); // 1 second delay
+        });
+    </script>
+</body>
+</html>
